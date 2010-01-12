@@ -16,6 +16,9 @@ sub new {
     }, $class;
 
     local *ENV = $env;
+    # we don't want CGI.pm to try to detect and handle mod_perl; that's PSGI's
+    # job
+    local $CGI::MOD_PERL = 0;
     $self->SUPER::init;
 
     $self;
